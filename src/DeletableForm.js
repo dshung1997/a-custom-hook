@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useThrottle } from "./useThrottle";
+import { FontSizeContext } from "./context";
 
 const initialValue = "123456789";
 
@@ -12,6 +13,8 @@ const DeletableForm = () => {
     e.preventDefault();
   };
 
+  const fontSize = useContext(FontSizeContext);
+
   return (
     <div>
       <input
@@ -21,7 +24,10 @@ const DeletableForm = () => {
         onChange={onChange}
       />
 
-      <p className={value !== initialValue ? "shown" : "hidden"}>
+      <p
+        className={value !== initialValue ? "shown" : "hidden"}
+        style={{ fontSize }}
+      >
         <i>It can be deleted at most ONE char per second ¯\_(ツ)_/¯</i>
       </p>
     </div>
